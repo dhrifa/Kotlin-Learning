@@ -19,34 +19,19 @@ fun validateCard(card: String, exp: String, list: List<Int>): Boolean {
 }
 
 fun main() {
-    var paragragh = "some random string @test challenge @okay"
-    val map = "@test is Laptop, @okay is Gone"
-    var listWords = arrayListOf<String>()
-    val listAnnotatedMapWords = arrayListOf<String>()
-    val annotationRef = mapOf<String, String>("@Test" to "Laptop")
-
-    for (word in paragragh.split(" ")) {
-        listWords.add(word)
-    }
-    listWords.map {
-        if (it=="@test") "laptop" else it
-//        if (it=="@okay") "gone" else it
-
-    }
-    println(listWords)
-
-    println(paragragh)
-
     //1
     val s = "aaba"
     println("$s inversed: ${reverseString(s)}")
-    //2
 
+    //2
+    var paragragh = "some random string @test challenge @okay"
+    val map = "@test is Laptop, @okay is Gone"
+    println(stringAnnotaionReplace(paragragh))
     //3
     val card = "1111-2321-7625-1234"
     val list = listOf(1111, 1232, 5627, 8121)
     val date = "12/34"
-    println("card validation: ${validateCard(card, date,list)}")
+    println("card validation: ${validateCard(card, date, list)}")
 }
 
 //
@@ -56,7 +41,37 @@ fun main() {
 //Output: some random string Laptop challenge Gone
 //
 
-fun stringAnnotaionReplace(str: String, strReplace: List<String>): String {
+fun stringAnnotaionReplace(paragragh: String): String {
+
+    val listWords = arrayListOf<String>()//[some, random, string, @test, challenge, @okay]
+    val listAnnotatedWords = arrayListOf<String>()//@test, @okay
+    val listMap = arrayListOf("laptop", "Gone")//=> how tto get those by coding
+
+    for (word in paragragh.split(" ")) {
+        listWords.add(word)
+        if (word.startsWith("@")) listAnnotatedWords.add(word)
+    }
+    println(listWords)
+
+    listAnnotatedWords.forEach {
+        val position = listWords?.indexOf(it)
+        val positionMap = listAnnotatedWords.indexOf(it)
+        if (position != null)
+        listWords[position] = listMap[positionMap] //can i use map here?
+    }
+
+//    val posTest = listWords.indexOfFirst { it == "@test" }
+//    listWords[posTest] = "laptop"
+//    val posOkay = listWords.indexOfFirst { it == "@okay" }
+//    listWords[posOkay] = "Gone"
+    var text = ""
+    listWords.forEach { text = "$text $it " }
+
+    return text
+}
+
+
+fun stringAnnotaionReplace2(paragragh: String, strReplace: List<String>): String {
     var paragragh = "some random string @test challenge @okay"
     val map = "@test is Laptop, @okay is Gone"
     val listAnnotatedWords = arrayListOf<String>()//list of annotated words: to be replaced
@@ -72,7 +87,6 @@ fun stringAnnotaionReplace(str: String, strReplace: List<String>): String {
     for (word in listAnnotatedWords) {
         val index = word.indices
 //          paragragh.replace(word, listAnnotatedMapWords[indexOf(word)])
-
     }
 
     return ""
