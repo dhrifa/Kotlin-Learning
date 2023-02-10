@@ -1,5 +1,7 @@
 package com.example.kotlinlearning.strings
 
+import java.io.PipedOutputStream
+
 //
 //1) Reverse a string input: aaba -> abaa
 //
@@ -56,8 +58,11 @@ fun stringAnnotaionReplace(paragragh: String): String {
     listAnnotatedWords.forEach {
         val position = listWords?.indexOf(it)
         val positionMap = listAnnotatedWords.indexOf(it)
-        if (position != null)
-        listWords[position] = listMap[positionMap] //can i use map here?
+        if (position != null) {
+            val text = mapOf(listWords[position] to  listMap[positionMap])
+            listWords[position] = listMap[positionMap] //can i use map here?
+            println(text)
+        }
     }
 
 //    val posTest = listWords.indexOfFirst { it == "@test" }
