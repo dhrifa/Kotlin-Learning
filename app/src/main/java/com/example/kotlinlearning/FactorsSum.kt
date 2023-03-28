@@ -2,12 +2,10 @@ package com.example.kotlinlearning
 
 import kotlin.math.sqrt
 
-class FactorsSum {
-}
 
 fun main() {
- val arr = arrayOf(12,4)
-    for (item in arr){
+    val arr = arrayOf(12, 4, 1)
+    for (item in arr) {
         sumFactors(item)
     }
 }
@@ -15,11 +13,12 @@ fun main() {
 fun sumFactors(x: Int) {
     var sum: Int = 1
 
-    for (i in 2..x){// sqrt(x.toDouble()).toInt()) {
+    for (i in 2..x / 2) {
         if (x % i == 0) {
             sum += i
         }
     }
+    if (x != 1) sum += x
     println(sum)
 }
 
